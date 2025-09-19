@@ -161,19 +161,18 @@ const AdminServicesPage = () => {
   );
 
   useEffect(() => {
-  if (success || error) {
-    const timer = setTimeout(() => {
-      setSuccess('');
-      setError('');
-    }, 3000);
+    if (success || error) {
+      const timer = setTimeout(() => {
+        setSuccess('');
+        setError('');
+      }, 3000);
 
-    return () => clearTimeout(timer); 
-  }
-}, [success, error]);
-
+      return () => clearTimeout(timer); 
+    }
+  }, [success, error]);
 
   return (
-    <section className="relative py-24 px-6 md:px-16 text-white overflow-hidden ">
+    <section className="relative py-24 px-6 md:px-16 text-white overflow-hidden">
       {/* Styles */}
       <style>{`
         .glass-card {
@@ -266,7 +265,7 @@ const AdminServicesPage = () => {
       >
         {/* Header */}
         <h2 className="text-4xl md:text-6xl font-extrabold mb-16 text-center">
-          Gérer les Services
+          Manage Services
         </h2>
 
         {/* Search and Add Button */}
@@ -275,7 +274,6 @@ const AdminServicesPage = () => {
           animate={{ opacity: 1 }}
           className="mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
         >
-          
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -288,7 +286,7 @@ const AdminServicesPage = () => {
             aria-label="Add new service"
           >
             <FaPlus />
-            Ajouter un Service
+            Add Service
           </motion.button>
         </motion.div>
 
@@ -304,7 +302,7 @@ const AdminServicesPage = () => {
         <div className="grid md:grid-cols-3 gap-10">
           {filteredServices.length === 0 ? (
             <p className="text-gray-300 col-span-full text-center text-lg md:text-xl">
-              Aucun service trouvé.
+              No services found.
             </p>
           ) : (
             filteredServices.map((service, i) => (
@@ -318,16 +316,16 @@ const AdminServicesPage = () => {
               >
                 <h3 className="text-xl md:text-2xl font-semibold text-white mb-4">{service.title}</h3>
                 <p className="text-lg text-gray-200 mb-4">
-                  <span className="font-semibold text-blue-400">Prix:</span> {service.price}
+                  <span className="font-semibold text-blue-400">Price:</span> {service.price}
                 </p>
                 <p className="text-lg text-gray-200 mb-4">
-                  <span className="font-semibold text-blue-400">Prix Mensuel:</span> {service.monthprice}
+                  <span className="font-semibold text-blue-400">Monthly Price:</span> {service.monthprice}
                 </p>
                 <p className="text-lg text-gray-200 mb-4">
-                  <span className="font-semibold text-blue-400">Bouton:</span> {service.button}
+                  <span className="font-semibold text-blue-400">Button:</span> {service.button}
                 </p>
                 <div className="text-lg text-gray-200 mb-6">
-                  <span className="font-semibold text-blue-400">Fonctionnalités:</span>
+                  <span className="font-semibold text-blue-400">Features:</span>
                   <ul className="list-disc list-inside mt-2">
                     {service.properties.map((prop, index) => (
                       <li key={index} className="text-gray-300">{prop}</li>
@@ -340,7 +338,7 @@ const AdminServicesPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer neon-button p-3 rounded-full"
                     onClick={() => handleToggleShowOnMainPage(service._id)}
-                    title={service.showOnMainPage ? 'Masquer de la page principale' : 'Afficher sur la page principale'}
+                    title={service.showOnMainPage ? 'Hide from main page' : 'Show on main page'}
                     aria-label={service.showOnMainPage ? 'Hide from main page' : 'Show on main page'}
                   >
                     {service.showOnMainPage ? <FaEye size={18} /> : <FaEyeSlash size={18} />}
@@ -350,7 +348,7 @@ const AdminServicesPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer popular-button p-3 rounded-full"
                     onClick={() => handleTogglePopular(service._id)}
-                    title={service.popular ? 'Retirer le statut populaire' : 'Marquer comme populaire'}
+                    title={service.popular ? 'Remove popular status' : 'Mark as popular'}
                     aria-label={service.popular ? 'Remove popular status' : 'Mark as popular'}
                   >
                     {service.popular ? <FaStar size={18} /> : <FaStarHalf size={18} />}
@@ -360,7 +358,7 @@ const AdminServicesPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer edit-button p-3 rounded-full"
                     onClick={() => handleEdit(service)}
-                    title="Modifier le service"
+                    title="Edit service"
                     aria-label="Edit service"
                   >
                     <FaEdit size={18} />
@@ -370,7 +368,7 @@ const AdminServicesPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer delete-button p-3 rounded-full"
                     onClick={() => handleDelete(service._id)}
-                    title="Supprimer le service"
+                    title="Delete service"
                     aria-label="Delete service"
                   >
                     <FaTrash size={18} />
@@ -391,65 +389,65 @@ const AdminServicesPage = () => {
               className="glass-card p-6 md:p-8 rounded-3xl w-11/12 max-w-md max-h-[80vh] overflow-y-auto"
             >
               <h3 className="text-2xl md:text-3xl font-bold text-blue-400 mb-6">
-                {isEditMode ? 'Modifier le Service' : 'Ajouter un Nouveau Service'}
+                {isEditMode ? 'Edit Service' : 'Add New Service'}
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Titre</label>
+                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Title</label>
                   <input
                     type="text"
                     value={form.title}
                     onChange={(e) => setForm({ ...form, title: e.target.value })}
                     className="input-field w-full px-4 py-2 rounded-lg text-sm md:text-base"
-                    placeholder="e.g., Pack Essentiel"
+                    placeholder="e.g., Essential Package"
                     required
                     aria-required="true"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Fonctionnalités (séparées par des virgules)</label>
+                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Features (comma-separated)</label>
                   <textarea
                     value={form.properties}
                     onChange={(e) => setForm({ ...form, properties: e.target.value })}
                     className="input-field w-full px-4 py-2 rounded-lg text-sm md:text-base"
-                    placeholder="e.g., Site web, SEO, Support 24/7"
+                    placeholder="e.g., Website, SEO, 24/7 Support"
                     rows="3"
                     required
                     aria-required="true"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Prix</label>
+                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Price</label>
                   <input
                     type="text"
                     value={form.price}
                     onChange={(e) => setForm({ ...form, price: e.target.value })}
                     className="input-field w-full px-4 py-2 rounded-lg text-sm md:text-base"
-                    placeholder="e.g., 5000 €"
+                    placeholder="e.g., $5000"
                     required
                     aria-required="true"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Prix Mensuel</label>
+                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Monthly Price</label>
                   <input
                     type="text"
                     value={form.monthprice}
                     onChange={(e) => setForm({ ...form, monthprice: e.target.value })}
                     className="input-field w-full px-4 py-2 rounded-lg text-sm md:text-base"
-                    placeholder="e.g., 500 €/mois"
+                    placeholder="e.g., $500/month"
                     required
                     aria-required="true"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Texte du Bouton</label>
+                  <label className="block text-gray-200 mb-1 text-sm md:text-base">Button Text</label>
                   <input
                     type="text"
                     value={form.button}
                     onChange={(e) => setForm({ ...form, button: e.target.value })}
                     className="input-field w-full px-4 py-2 rounded-lg text-sm md:text-base"
-                    placeholder="e.g., Souscrire"
+                    placeholder="e.g., Subscribe"
                     required
                     aria-required="true"
                   />
@@ -462,7 +460,7 @@ const AdminServicesPage = () => {
                     className="cursor-pointer form-checkbox h-5 w-5 text-blue-400"
                     aria-label="Mark as popular"
                   />
-                  <label className="text-gray-200 text-sm md:text-base">Marquer comme Populaire</label>
+                  <label className="text-gray-200 text-sm md:text-base">Mark as Popular</label>
                 </div>
                 <div className="flex items-center gap-2">
                   <input
@@ -472,7 +470,7 @@ const AdminServicesPage = () => {
                     className="cursor-pointer form-checkbox h-5 w-5 text-blue-400"
                     aria-label="Show on main page"
                   />
-                  <label className="text-gray-200 text-sm md:text-base">Afficher sur la Page Principale</label>
+                  <label className="text-gray-200 text-sm md:text-base">Show on Main Page</label>
                 </div>
                 <div className="flex gap-3">
                   <motion.button
@@ -482,7 +480,7 @@ const AdminServicesPage = () => {
                     className="cursor-pointer neon-button w-full px-4 py-2 text-white font-semibold rounded-lg text-sm md:text-base"
                     aria-label={isEditMode ? 'Update service' : 'Add service'}
                   >
-                    {isEditMode ? 'Mettre à Jour' : 'Ajouter'}
+                    {isEditMode ? 'Update' : 'Add'}
                   </motion.button>
                   <motion.button
                     type="button"
@@ -497,7 +495,7 @@ const AdminServicesPage = () => {
                     }}
                     aria-label="Cancel"
                   >
-                    Annuler
+                    Cancel
                   </motion.button>
                 </div>
               </form>

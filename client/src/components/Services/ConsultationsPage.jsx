@@ -18,37 +18,39 @@ const ConsultationsPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-// Auto-hide alerts after 3s
+
+  // Auto-hide alerts after 3s
   useEffect(() => {
     if (error || success) {
       const timer = setTimeout(() => {
-        setError('');
-        setSuccess('');
+        setError("");
+        setSuccess("");
       }, 3000);
       return () => clearTimeout(timer);
     }
   }, [error, success]);
+
   const projectTypes = [
-    "Site IA Découverte",
-    "Site IA Professionnel",
-    "Agent IA Closer",
-    "Pack Ultime",
+    "AI Website – Starter",
+    "AI Website – Professional",
+    "AI Closer Agent",
+    "Ultimate Pack",
     "Other",
   ];
 
   const validateForm = () => {
     const errors = {};
-    if (!formData.fullName.trim()) errors.fullName = "Le nom complet est requis";
+    if (!formData.fullName.trim()) errors.fullName = "Full name is required";
     if (!formData.email.trim()) {
-      errors.email = "L’email est requis";
+      errors.email = "Email is required";
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      errors.email = "Format d’email invalide";
+      errors.email = "Invalid email format";
     }
-    if (!formData.projectType) errors.projectType = "Le type de projet est requis";
+    if (!formData.projectType) errors.projectType = "Project type is required";
     if (formData.projectType === "Other" && !formData.otherProjectType.trim()) {
-      errors.otherProjectType = "Veuillez spécifier le type de projet";
+      errors.otherProjectType = "Please specify the project type";
     }
-    if (!formData.timeline) errors.timeline = "Le délai est requis";
+    if (!formData.timeline) errors.timeline = "Timeline is required";
     return errors;
   };
 
@@ -56,6 +58,7 @@ const ConsultationsPage = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
+
     if (name === "projectType" && value !== "Other") {
       setFormData((prev) => ({ ...prev, otherProjectType: "" }));
       setFormErrors((prev) => ({ ...prev, otherProjectType: "" }));
@@ -84,12 +87,13 @@ const ConsultationsPage = () => {
         timeline: "",
         description: "",
       });
-      setSuccess("✅ Demande de consultation envoyée avec succès !");
+      setSuccess("✅ Consultation request sent successfully!");
     } catch (err) {
       console.error("Consultation form submission error:", err);
-      const errorMessages = err.response?.data?.errors?.map((e) => e.msg).join("; ") || 
-        err.response?.data?.message || 
-        "⚠️ Une erreur est survenue lors de l’envoi de la demande";
+      const errorMessages =
+        err.response?.data?.errors?.map((e) => e.msg).join("; ") ||
+        err.response?.data?.message ||
+        "⚠️ An error occurred while sending your request";
       setError(errorMessages);
     } finally {
       setLoading(false);
@@ -97,7 +101,7 @@ const ConsultationsPage = () => {
   };
 
   return (
-    <section className="relative py-24 px-6 md:px-16 text-white overflow-hidden ">
+    <section className="relative py-24 px-6 md:px-16 text-white overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -111,7 +115,7 @@ const ConsultationsPage = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-4xl md:text-5xl font-extrabold mb-16 text-center"
         >
-          Demander une <span className="text-yellow-400">Consultation</span>
+          Request a <span className="text-cyan-400">Consultation</span>
         </motion.h2>
 
         {/* Form */}
@@ -120,12 +124,12 @@ const ConsultationsPage = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-black/60 border border-blue-500/40 backdrop-blur-lg p-10 rounded-2xl shadow-amber-300 shadow-md hover:shadow-xl transition-all duration-300"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-black/60 border border-cyan-500/40 backdrop-blur-lg p-10 rounded-2xl shadow-cyan-300 shadow-md hover:shadow-xl transition-all duration-300"
         >
           {/* Full Name */}
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-200 mb-1">
-              Nom complet <span className="text-red-400">*</span>
+              Full Name <span className="text-red-400">*</span>
             </label>
             <input
               type="text"
@@ -133,12 +137,10 @@ const ConsultationsPage = () => {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              placeholder="Votre nom complet"
+              placeholder="Enter your full name"
               className={`w-full px-4 py-3 rounded-xl bg-black/70 border ${
-                formErrors.fullName ? "border-red-500" : "border-blue-500/40"
-              } focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200`}
-              aria-label="Your full name"
-              aria-required="true"
+                formErrors.fullName ? "border-red-500" : "border-cyan-500/40"
+              } focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200`}
             />
             {formErrors.fullName && (
               <p className="text-red-400 text-sm mt-1">{formErrors.fullName}</p>
@@ -156,12 +158,10 @@ const ConsultationsPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Votre email"
+              placeholder="Enter your email"
               className={`w-full px-4 py-3 rounded-xl bg-black/70 border ${
-                formErrors.email ? "border-red-500" : "border-blue-500/40"
-              } focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200`}
-              aria-label="Your email"
-              aria-required="true"
+                formErrors.email ? "border-red-500" : "border-cyan-500/40"
+              } focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200`}
             />
             {formErrors.email && (
               <p className="text-red-400 text-sm mt-1">{formErrors.email}</p>
@@ -171,7 +171,7 @@ const ConsultationsPage = () => {
           {/* Phone */}
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-gray-200 mb-1">
-              Téléphone
+              Phone
             </label>
             <input
               type="tel"
@@ -179,16 +179,15 @@ const ConsultationsPage = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Votre numéro de téléphone"
-              className="w-full px-4 py-3 rounded-xl bg-black/70 border border-blue-500/40 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200"
-              aria-label="Your phone number"
+              placeholder="Your phone number"
+              className="w-full px-4 py-3 rounded-xl bg-black/70 border border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200"
             />
           </div>
 
           {/* Company */}
           <div>
             <label htmlFor="company" className="block text-sm font-medium text-gray-200 mb-1">
-              Entreprise
+              Company
             </label>
             <input
               type="text"
@@ -196,16 +195,15 @@ const ConsultationsPage = () => {
               name="company"
               value={formData.company}
               onChange={handleChange}
-              placeholder="Nom de votre entreprise"
-              className="w-full px-4 py-3 rounded-xl bg-black/70 border border-blue-500/40 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200"
-              aria-label="Your company name"
+              placeholder="Your company name"
+              className="w-full px-4 py-3 rounded-xl bg-black/70 border border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200"
             />
           </div>
 
           {/* Project Type */}
           <div>
             <label htmlFor="projectType" className="block text-sm font-medium text-gray-200 mb-1">
-              Type de projet <span className="text-red-400">*</span>
+              Project Type <span className="text-red-400">*</span>
             </label>
             <select
               id="projectType"
@@ -213,14 +211,16 @@ const ConsultationsPage = () => {
               value={formData.projectType}
               onChange={handleChange}
               className={`w-full px-4 py-3 rounded-xl bg-black/70 border ${
-                formErrors.projectType ? "border-red-500" : "border-blue-500/40"
-              } focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200`}
-              aria-label="Project type"
-              aria-required="true"
+                formErrors.projectType ? "border-red-500" : "border-cyan-500/40"
+              } focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200`}
             >
-              <option value="" disabled>Sélectionnez un type de projet</option>
+              <option value="" disabled>
+                Select a project type
+              </option>
               {projectTypes.map((type) => (
-                <option key={type} value={type}>{type}</option>
+                <option key={type} value={type}>
+                  {type}
+                </option>
               ))}
             </select>
             {formErrors.projectType && (
@@ -232,7 +232,7 @@ const ConsultationsPage = () => {
           {formData.projectType === "Other" && (
             <div>
               <label htmlFor="otherProjectType" className="block text-sm font-medium text-gray-200 mb-1">
-                Autre type de projet <span className="text-red-400">*</span>
+                Other Project Type <span className="text-red-400">*</span>
               </label>
               <input
                 type="text"
@@ -240,12 +240,10 @@ const ConsultationsPage = () => {
                 name="otherProjectType"
                 value={formData.otherProjectType}
                 onChange={handleChange}
-                placeholder="Précisez le type de projet"
+                placeholder="Please specify"
                 className={`w-full px-4 py-3 rounded-xl bg-black/70 border ${
-                  formErrors.otherProjectType ? "border-red-500" : "border-blue-500/40"
-                } focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200`}
-                aria-label="Other project type"
-                aria-required="true"
+                  formErrors.otherProjectType ? "border-red-500" : "border-cyan-500/40"
+                } focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200`}
               />
               {formErrors.otherProjectType && (
                 <p className="text-red-400 text-sm mt-1">{formErrors.otherProjectType}</p>
@@ -254,34 +252,30 @@ const ConsultationsPage = () => {
           )}
 
           {/* Timeline */}
-          {/* Timeline */}
-<div>
-  <label htmlFor="timeline" className="block text-sm font-medium text-gray-200 mb-1">
-    Délai du projet <span className="text-red-400">*</span>
-  </label>
-  <input
-    type="text"
-    id="timeline"
-    name="timeline"
-    value={formData.timeline}
-    onChange={handleChange}
-    placeholder="Ex: 2 mois, ASAP, fin d'année..."
-    className={`w-full px-4 py-3 rounded-xl bg-black/70 border ${
-      formErrors.timeline ? "border-red-500" : "border-blue-500/40"
-    } focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200`}
-    aria-label="Project timeline"
-    aria-required="true"
-  />
-  {formErrors.timeline && (
-    <p className="text-red-400 text-sm mt-1">{formErrors.timeline}</p>
-  )}
-</div>
-
+          <div>
+            <label htmlFor="timeline" className="block text-sm font-medium text-gray-200 mb-1">
+              Project Timeline <span className="text-red-400">*</span>
+            </label>
+            <input
+              type="text"
+              id="timeline"
+              name="timeline"
+              value={formData.timeline}
+              onChange={handleChange}
+              placeholder="e.g., 2 months, ASAP, end of year..."
+              className={`w-full px-4 py-3 rounded-xl bg-black/70 border ${
+                formErrors.timeline ? "border-red-500" : "border-cyan-500/40"
+              } focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200`}
+            />
+            {formErrors.timeline && (
+              <p className="text-red-400 text-sm mt-1">{formErrors.timeline}</p>
+            )}
+          </div>
 
           {/* Description */}
           <div className="md:col-span-2">
             <label htmlFor="description" className="block text-sm font-medium text-gray-200 mb-1">
-              Description du projet
+              Project Description
             </label>
             <textarea
               id="description"
@@ -289,15 +283,14 @@ const ConsultationsPage = () => {
               value={formData.description}
               onChange={handleChange}
               rows="4"
-              placeholder="Décrivez votre projet..."
-              className="w-full px-4 py-3 rounded-xl bg-black/70 border border-blue-500/40 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-400 transition duration-200"
-              aria-label="Project description"
+              placeholder="Describe your project..."
+              className="w-full px-4 py-3 rounded-xl bg-black/70 border border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-400 text-white placeholder-gray-400 transition duration-200"
             ></textarea>
           </div>
 
           {/* Alerts */}
           {success && (
-            <div className="md:col-span-2 px-4 py-2 rounded-lg bg-blue-500/20 border border-blue-500 text-blue-400 text-sm">
+            <div className="md:col-span-2 px-4 py-2 rounded-lg bg-cyan-500/20 border border-cyan-500 text-cyan-400 text-sm">
               {success}
             </div>
           )}
@@ -311,17 +304,16 @@ const ConsultationsPage = () => {
           <motion.button
             whileHover={{
               scale: 1.05,
-              boxShadow: "0px 0px 25px rgba(250, 204, 21, 0.7)",
+              boxShadow: "0px 0px 25px rgba(34, 211, 238, 0.7)",
             }}
             whileTap={{ scale: 0.95 }}
             type="submit"
             disabled={loading}
-            className={`cursor-pointer md:col-span-2 w-full py-3 rounded-xl font-semibold text-lg bg-gradient-to-r from-yellow-400 to-yellow-300 text-black shadow-[0_0_20px_rgba(250,204,21,0.6)] hover:shadow-[0_0_30px_rgba(250,204,21,0.9)] transition-all duration-300 ${
+            className={`cursor-pointer md:col-span-2 w-full py-3 rounded-xl font-semibold text-lg bg-gradient-to-r from-cyan-400 to-cyan-300 text-black shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:shadow-[0_0_30px_rgba(34,211,238,0.9)] transition-all duration-300 ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
-            aria-label={loading ? "Submitting" : "Submit consultation request"}
           >
-            {loading ? "Envoi..." : "Envoyer la Demande"}
+            {loading ? "Sending..." : "Submit Request"}
           </motion.button>
         </motion.form>
       </motion.div>

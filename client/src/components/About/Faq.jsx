@@ -4,24 +4,24 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Combien de temps faut-il pour créer mon site IA ?",
+    question: "How long does it take to build my AI-powered website?",
     answer:
-      "Nos packs démarrent à 72 heures pour une page unique. Pour les sites complets et packs ultimes, comptez 1 à 2 semaines selon votre contenu.",
+      "Our starter packs are ready in as little as 72 hours for a single-page site. Full websites and ultimate packs take 1–2 weeks depending on your content.",
   },
   {
-    question: "Puis-je modifier le contenu moi-même ?",
+    question: "Can I edit the content myself?",
     answer:
-      "Bien sûr ! Nous vous donnons accès à un espace d’édition simple. Et notre équipe reste disponible pour vous accompagner.",
+      "Absolutely! You’ll get access to a simple editing dashboard. Our team also remains available to support you whenever needed.",
   },
   {
-    question: "L’agent IA fonctionne-t-il 24/7 ?",
+    question: "Does the AI agent work 24/7?",
     answer:
-      "Oui. Votre agent IA gère les leads jour et nuit, sur vos canaux préférés (web, WhatsApp, e-mail).",
+      "Yes. Your AI agent manages leads day and night across your preferred channels (web, WhatsApp, email).",
   },
   {
-    question: "Quelles sont vos conditions de paiement ?",
+    question: "What are your payment terms?",
     answer:
-      "Pour les packs one-shot, 50 % à la commande et 50 % à la livraison. Les abonnements mensuels sont prélevés automatiquement chaque mois.",
+      "For one-shot packs, it’s 50% upfront and 50% upon delivery. Monthly subscriptions are billed automatically each month.",
   },
 ];
 
@@ -33,7 +33,7 @@ export default function FAQPage() {
   };
 
   return (
-    <section className=" text-white  px-6">
+    <section className="text-white px-6">
       <div className="max-w-4xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -41,25 +41,25 @@ export default function FAQPage() {
           transition={{ duration: 0.6 }}
           className="text-3xl sm:text-5xl font-extrabold text-center mb-12"
         >
-           Foire Aux <span className="text-yellow-400">Questions</span> 
+          Frequently Asked <span className="text-cyan-400">Questions</span>
         </motion.h2>
 
         <div className="space-y-6">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-gray-800/70 backdrop-blur-md rounded-xl shadow-md border border-yellow-500/20 shadow-cyan-300"
+              className="bg-gray-800/70 backdrop-blur-md rounded-xl shadow-md border border-cyan-500/20 shadow-cyan-300"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="flex justify-between items-center w-full px-6 py-4 text-left text-lg font-medium text-yellow-400 focus:outline-none cursor-pointer "
+                className="flex justify-between items-center w-full px-6 py-4 text-left text-lg font-medium text-cyan-400 focus:outline-none cursor-pointer"
               >
                 {faq.question}
                 <motion.div
                   animate={{ rotate: openIndex === index ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="w-6 h-6 text-yellow-400" />
+                  <ChevronDown className="w-6 h-6 text-cyan-400" />
                 </motion.div>
               </button>
 

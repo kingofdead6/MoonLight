@@ -27,26 +27,24 @@ export default function AdminDashboard() {
     {
       path: "/admin/services",
       title: "Services",
-      description: "Créer, modifier et supprimer des services",
+      description: "Create, edit, and delete services",
     },
     {
       path: "/admin/contact",
       title: "Messages",
-      description: "Consulter les messages envoyés par les clients",
+      description: "View messages sent by clients",
     },
     {
       path: "/admin/newsletter",
       title: "Newsletter",
-      description: "Voir et gérer les abonnés à la newsletter",
+      description: "Manage newsletter subscribers",
     },
     {
       path: "/admin/consultation",
       title: "Consultations",
-      description: "Consulter les demandes de travaille envoyés par les clients",
+      description: "Review consultation requests sent by clients",
     }
   ];
-
-  const sections = adminSections;
 
   return (
     <div className="min-h-screen text-white py-12 px-4 pt-20">
@@ -57,16 +55,16 @@ export default function AdminDashboard() {
         className="max-w-4xl mx-auto"
       >
         <h1 className="text-4xl font-bold text-white text-center mb-12">
-          Tableau de bord administrateur
+          Admin Dashboard
         </h1>
         <div className="grid md:grid-cols-2 gap-6">
-          {sections.map((section, index) => (
+          {adminSections.map((section, index) => (
             <Link
               key={index}
               to={section.path}
               className="p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition text-center shadow-lg hover:shadow-2xl shadow-cyan-400"
             >
-              <h2 className="text-2xl font-semibold text-yellow-400">{section.title}</h2>
+              <h2 className="text-2xl font-semibold text-cyan-400">{section.title}</h2>
               <p className="mt-2 text-gray-300">{section.description}</p>
             </Link>
           ))}

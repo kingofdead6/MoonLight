@@ -19,7 +19,7 @@ export default function Footer() {
   const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
-    if (!email) return "L’email est requis";
+    if (!email) return "Email is required";
     return "";
   };
 
@@ -36,11 +36,11 @@ export default function Footer() {
     try {
       await axios.post(`${API_BASE_URL}/newsletters`, { email });
       setEmail("");
-      setSuccess("✅ Abonnement réussi !");
+      setSuccess("✅ Subscription successful!");
     } catch (err) {
       setError(
         err.response?.data?.message ||
-          "⚠️ Une erreur est survenue lors de l’abonnement"
+          "⚠️ An error occurred while subscribing"
       );
     } finally {
       setLoading(false);
@@ -53,47 +53,43 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
           {/* Logo + Info */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-  <img
-    src="https://res.cloudinary.com/dtwa3lxdk/image/upload/v1757088952/20250905_1458_White_Text_Logo_remix_01k4d2m58pe94rwwsbnh4ew9we_gcpaqu.png"
-    alt="CONNECTIK Logo"
-    className="w-48 h-48 -my-20 object-contain drop-shadow-[0_0_12px_rgba(250,204,21,0.6)]"
-  />
+            <h1 className="text-4xl font-bold text-cyan-400 mb-2 ml-6">
+              MoonLight
+            </h1>
+            <p className="text-sm mt-4 ml-6 text-gray-400 max-w-xs">
+              AI-powered digital solutions. Based in Brussels, serving clients
+              worldwide.
+            </p>
 
-  <p className="text-sm mt-4 ml-6 text-gray-400 max-w-xs">
-    Solutions digitales boostées par l’IA. Basés à Bruxelles, nous
-    servons des clients dans le monde entier.
-  </p>
-
-  <p className="text-xs mt-3 ml-6 text-gray-500">
-    Créé par :{" "}
-    <a
-      href="https://www.softwebelevation.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-yellow-400 hover:underline"
-    >
-      SoftwebElevation
-    </a>
-  </p>
-</div>
-
+            <p className="text-xs mt-3 ml-6 text-gray-500">
+              Created by:{" "}
+              <a
+                href="https://www.softwebelevation.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-400 hover:underline"
+              >
+                SoftwebElevation
+              </a>
+            </p>
+          </div>
 
           {/* Quick Links */}
           <div className="text-center md:text-left">
-            <h4 className="text-lg font-semibold text-yellow-400 mb-4">
-              Liens rapides
+            <h4 className="text-lg font-semibold text-cyan-400 mb-4">
+              Quick Links
             </h4>
             <ul className="space-y-2">
               {[
-                { label: "Accueil", href: "/" },
-                { label: "À propos", href: "/about" },
+                { label: "Home", href: "/" },
+                { label: "About", href: "/about" },
                 { label: "Services", href: "/services" },
                 { label: "Consultation", href: "/consultation" },
               ].map((link, i) => (
                 <li key={i}>
                   <a
                     href={link.href}
-                    className="hover:text-yellow-400 transition-colors duration-200"
+                    className="hover:text-cyan-400 transition-colors duration-200"
                   >
                     {link.label}
                   </a>
@@ -104,11 +100,11 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-lg font-semibold text-yellow-400 mb-4">
+            <h4 className="text-lg font-semibold text-cyan-400 mb-4">
               Newsletter
             </h4>
             <p className="text-sm mb-3">
-              Recevez nos nouveautés et offres exclusives.
+              Get our latest updates and exclusive offers.
             </p>
             <form
               onSubmit={handleSubmit}
@@ -118,56 +114,30 @@ export default function Footer() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre e-mail"
+                placeholder="Your email"
                 className={`flex-1 px-4 py-2 rounded-lg bg-gray-900 border ${
                   formError ? "border-red-500" : "border-gray-700"
-                } focus:outline-none focus:border-yellow-400 text-white text-sm`}
+                } focus:outline-none focus:border-cyan-400 text-white text-sm`}
               />
               <button
                 type="submit"
                 disabled={loading}
-                className={`cursor-pointer px-5 py-2 bg-yellow-400 text-black font-bold rounded-lg shadow-md hover:shadow-yellow-500/40 transition ${
+                className={`cursor-pointer px-5 py-2 bg-cyan-400 text-black font-bold rounded-lg shadow-md hover:shadow-cyan-500/40 transition ${
                   loading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
-                {loading ? "Envoi..." : "S’abonner"}
+                {loading ? "Sending..." : "Subscribe"}
               </button>
             </form>
             {formError && <p className="text-red-400 text-sm">{formError}</p>}
             {error && <p className="text-red-400 text-sm">{error}</p>}
             {success && <p className="text-green-400 text-sm">{success}</p>}
-
-            {/* Social + Contact */}
-            <div className="mt-6 flex flex-col gap-3 text-sm">
-           
-
-              {/* Contact */}
-              <div className="flex items-center gap-2 justify-center md:justify-start">
-                <FaEnvelope className="text-yellow-400" />
-                <span>mesbih_mehdi@hotmail.com</span>
-              </div>
-              <div className="flex items-center gap-2 justify-center md:justify-start">
-                <FaPhone className="text-yellow-400" />
-                <span>+32 492 53 91 63</span>
-              </div>
-              <div className="flex items-center gap-2 justify-center md:justify-start">
-                <FaWhatsapp className="text-green-500" />
-                <a
-                  href="https://wa.me/32492539163"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
-                >
-                  Discuter sur WhatsApp
-                </a>
-              </div>
-            </div>
           </div>
         </div>
 
         {/* Bottom */}
-        <div className="mt-10 border-t border-gray-700 pt-4 text-center text-xs text-gray-500 hover:text-yellow-300">
-          © {new Date().getFullYear()} CONNECTIK — Tous droits réservés
+        <div className="mt-10 border-t border-gray-700 pt-4 text-center text-xs text-gray-500 hover:text-cyan-300">
+          © {new Date().getFullYear()} MoonLight — All rights reserved
         </div>
       </div>
     </footer>

@@ -86,7 +86,7 @@ const AdminNewsletterPage = () => {
   );
 
   return (
-    <section className="min-h-screen py-24 px-6 md:px-16  text-white">
+    <section className="min-h-screen py-24 px-6 md:px-16 text-white">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -94,7 +94,7 @@ const AdminNewsletterPage = () => {
         className="max-w-7xl mx-auto"
       >
         <h2 className="text-4xl md:text-6xl font-extrabold mb-12 text-center">
-          Gérer les Abonnements à la Newsletter
+          Manage Newsletter Subscriptions
         </h2>
 
         {/* Search + Bulk Delete */}
@@ -103,7 +103,7 @@ const AdminNewsletterPage = () => {
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-400" />
             <input
               type="text"
-              placeholder="Rechercher par email..."
+              placeholder="Search by email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-800 border border-blue-500 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -119,7 +119,7 @@ const AdminNewsletterPage = () => {
             disabled={selectedIds.length === 0}
           >
             <FaTrash />
-            Supprimer la Sélection
+            Delete Selected
           </button>
         </div>
 
@@ -139,40 +139,39 @@ const AdminNewsletterPage = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {filteredNewsletters.length === 0 ? (
             <p className="text-gray-400 col-span-full text-center text-lg md:text-xl">
-              Aucun abonnement trouvé.
+              No subscriptions found.
             </p>
           ) : (
             filteredNewsletters.map((newsletter, i) => (
               <motion.div
-  key={newsletter._id}
-  variants={cardVariants}
-  initial="hidden"
-  animate="visible"
-  transition={{ duration: 0.6, delay: i * 0.1 }}
-  className="bg-gray-800/60 backdrop-blur-md border border-blue-500 rounded-3xl p-6 flex items-center justify-between hover:shadow-lg hover:shadow-blue-500/50 transition-all"
->
-  {/* Left side: checkbox + email */}
-  <div className="flex items-center gap-3">
-    <input
-      type="checkbox"
-      checked={selectedIds.includes(newsletter._id)}
-      onChange={() => handleCheckboxChange(newsletter._id)}
-      className="cursor-pointer form-checkbox h-5 w-5 text-blue-400"
-    />
-    <h3 className="text-lg md:text-xl font-semibold text-white break-all">
-      {newsletter.email}
-    </h3>
-  </div>
+                key={newsletter._id}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="bg-gray-800/60 backdrop-blur-md border border-blue-500 rounded-3xl p-6 flex items-center justify-between hover:shadow-lg hover:shadow-blue-500/50 transition-all"
+              >
+                {/* Left side: checkbox + email */}
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(newsletter._id)}
+                    onChange={() => handleCheckboxChange(newsletter._id)}
+                    className="cursor-pointer form-checkbox h-5 w-5 text-blue-400"
+                  />
+                  <h3 className="text-lg md:text-xl font-semibold text-white break-all">
+                    {newsletter.email}
+                  </h3>
+                </div>
 
-  {/* Right side: delete button */}
-  <button
-    onClick={() => handleDelete(newsletter._id)}
-    className="cursor-pointer p-3 rounded-full bg-red-500 hover:bg-red-600 transition-all"
-  >
-    <FaTrash size={18} className="text-white" />
-  </button>
-</motion.div>
-
+                {/* Right side: delete button */}
+                <button
+                  onClick={() => handleDelete(newsletter._id)}
+                  className="cursor-pointer p-3 rounded-full bg-red-500 hover:bg-red-600 transition-all"
+                >
+                  <FaTrash size={18} className="text-white" />
+                </button>
+              </motion.div>
             ))
           )}
         </div>

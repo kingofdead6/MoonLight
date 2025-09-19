@@ -17,7 +17,8 @@ export default function Hero() {
     <section
       className="relative h-screen flex items-center justify-center text-center text-white"
       style={{
-        backgroundImage: "url('https://res.cloudinary.com/dtwa3lxdk/image/upload/v1757085475/20250905_1616_Futuristic_Digital_Cityscape_simple_compose_01k4d72qj8f0krsh7zkke5qwxb_of0iha.png')", // place your Sora image in /public/
+        backgroundImage:
+          "url('https://res.cloudinary.com/dtwa3lxdk/image/upload/v1757085475/20250905_1616_Futuristic_Digital_Cityscape_simple_compose_01k4d72qj8f0krsh7zkke5qwxb_of0iha.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -29,9 +30,9 @@ export default function Hero() {
       <div className="relative z-10 max-w-4xl px-6">
         <motion.h1
           ref={headingRef}
-          className="text-5xl md:text-6xl font-extrabold leading-tight text-yellow-400 "
+          className="text-5xl md:text-6xl font-extrabold leading-tight text-cyan-400"
         >
-          Agence Premium d’Intégration Web & IA
+          Premium Web & AI Integration Agency
         </motion.h1>
 
         <motion.p
@@ -40,33 +41,32 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          Nous transformons votre présence en ligne avec des sites web haut de
-          gamme et des agents IA qui convertissent.
+          We transform your online presence with high-end websites and AI agents
+          that convert.
         </motion.p>
 
         <motion.div
-  className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 1, duration: 1 }}
->
-  {/* Vers la page Consultation */}
-  <a
-    href="/consultation"
-    className="px-6 py-3 bg-yellow-400 text-[#0a0f1f] hover:bg-yellow-300 rounded-2xl font-semibold shadow-[0_0_20px_#FFD700] transition"
-  >
-    Diagnostic gratuit
-  </a>
+          className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+        >
+          {/* To Consultation Page */}
+          <a
+            href="/consultation"
+            className="px-6 py-3 bg-cyan-400 text-[#0a0f1f] hover:bg-cyan-300 rounded-2xl font-semibold shadow-[0_0_20px_#00FFFF] transition"
+          >
+            Free Consultation
+          </a>
 
-  {/* Vers la page Services */}
-  <a
-    href="/services"
-    className="px-6 py-3 bg-[#0a0f1f] border border-yellow-400 text-yellow-400 hover:bg-yellow-500 hover:text-[#0a0f1f] rounded-2xl font-semibold shadow-[0_0_20px_#1e3a8a] transition"
-  >
-    Notre Services
-  </a>
-</motion.div>
-
+          {/* To Services Page */}
+          <a
+            href="/services"
+            className="px-6 py-3 bg-[#0a0f1f] border border-cyan-400 text-cyan-400 hover:bg-cyan-500 hover:text-[#0a0f1f] rounded-2xl font-semibold shadow-[0_0_20px_#1e3a8a] transition"
+          >
+            Our Services
+          </a>
+        </motion.div>
       </div>
     </section>
   );

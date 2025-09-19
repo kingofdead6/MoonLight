@@ -20,9 +20,9 @@ export default function AboutUs() {
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="text-5xl md:text-6xl font-bold text-yellow-400 drop-shadow-lg"
+          className="text-5xl md:text-6xl font-bold text-cyan-400 drop-shadow-lg"
         >
-          Qui sommes-nous ?
+          Who are we?
         </motion.h1>
 
         <motion.p
@@ -31,11 +31,10 @@ export default function AboutUs() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-6 text-lg md:text-xl text-gray-200 leading-relaxed"
         >
-          Chez <span className="text-yellow-400 font-semibold">Connectik</span>,
-          nous croyons que la technologie est un pont entre les idées et la
-          réussite. Notre mission est de créer des solutions numériques modernes,
-          élégantes et performantes pour accompagner les entreprises et les
-          particuliers vers le succès.
+          At <span className="text-cyan-400 font-semibold">MoonLight</span>, 
+          we believe that technology is a bridge between ideas and success. 
+          Our mission is to craft modern, elegant, and high-performing digital 
+          solutions that empower both businesses and individuals to achieve their goals.
         </motion.p>
       </div>
     </section>

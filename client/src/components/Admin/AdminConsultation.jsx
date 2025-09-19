@@ -30,11 +30,11 @@ const AdminConsultationPage = () => {
     }
   };
 
-  // Fetch consultations on mount
   useEffect(() => {
     fetchConsultations();
   }, []);
-// Auto-hide alerts after 3s
+
+  // Auto-hide alerts after 3s
   useEffect(() => {
     if (error || success) {
       const timer = setTimeout(() => {
@@ -44,6 +44,7 @@ const AdminConsultationPage = () => {
       return () => clearTimeout(timer);
     }
   }, [error, success]);
+
   // Handle single delete
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this consultation request?')) return;
@@ -52,8 +53,8 @@ const AdminConsultationPage = () => {
       await axios.delete(`${API_BASE_URL}/consultations/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setConsultations(consultations.filter(consultation => consultation._id !== id));
-      setSelectedIds(selectedIds.filter(selectedId => selectedId !== id));
+      setConsultations(consultations.filter((c) => c._id !== id));
+      setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
       setSuccess('Consultation deleted successfully!');
     } catch (error) {
       setError('Failed to delete consultation. Please try again.');
@@ -61,28 +62,29 @@ const AdminConsultationPage = () => {
     }
   };
 
-
   // Handle toggle seen
   const handleToggleSeen = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.patch(`${API_BASE_URL}/consultations/${id}/toggle-seen`, {}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setConsultations(consultations.map(consultation => (consultation._id === id ? res.data : consultation)));
+      const res = await axios.patch(
+        `${API_BASE_URL}/consultations/${id}/toggle-seen`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setConsultations(consultations.map((c) => (c._id === id ? res.data : c)));
       setSuccess(`Consultation marked as ${res.data.seen ? 'seen' : 'unseen'}.`);
     } catch (error) {
-      setError('Failed to toggle seen status. Please try again.');
+      setError('Failed to update consultation status. Please try again.');
       console.error('Error toggling seen status:', error);
     }
   };
 
-
-
-  // Filter consultations by search term
-  const filteredConsultations = consultations.filter(consultation =>
-    consultation.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    consultation.email.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter consultations
+  const filteredConsultations = consultations.filter(
+    (c) =>
+      c.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      c.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -95,10 +97,10 @@ const AdminConsultationPage = () => {
       >
         {/* Header */}
         <h2 className="text-4xl md:text-6xl font-extrabold mb-16 text-center">
-          Gérer les Demandes de Consultation
+          Manage Consultation Requests
         </h2>
 
-        {/* Search and Bulk Delete */}
+        {/* Search */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -108,14 +110,13 @@ const AdminConsultationPage = () => {
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-400" />
             <input
               type="text"
-              placeholder="Rechercher par nom ou email..."
+              placeholder="Search by name or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:border-blue-400 text-white text-sm md:text-base placeholder-gray-500"
               aria-label="Search consultation requests"
             />
           </div>
-         
         </motion.div>
 
         {/* Alerts */}
@@ -134,7 +135,7 @@ const AdminConsultationPage = () => {
         <div className="grid md:grid-cols-3 gap-10">
           {filteredConsultations.length === 0 ? (
             <p className="text-gray-300 col-span-full text-center text-lg md:text-xl">
-              Aucune demande de consultation trouvée.
+              No consultation requests found.
             </p>
           ) : (
             filteredConsultations.map((consultation, i) => (
@@ -147,32 +148,33 @@ const AdminConsultationPage = () => {
                 className="p-8 rounded-3xl bg-black/50 border border-blue-500/30 backdrop-blur-md hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] transition-all duration-300 flex flex-col"
               >
                 <div className="flex items-center mb-4">
-                 
-                  <h3 className="text-xl md:text-2xl font-semibold text-white">{consultation.fullName}</h3>
+                  <h3 className="text-xl md:text-2xl font-semibold text-white">
+                    {consultation.fullName}
+                  </h3>
                 </div>
                 <p className="text-lg text-gray-200 mb-2">
                   <span className="font-semibold text-blue-400">Email:</span> {consultation.email}
                 </p>
                 {consultation.phone && (
                   <p className="text-lg text-gray-200 mb-2">
-                    <span className="font-semibold text-blue-400">Téléphone:</span> {consultation.phone}
+                    <span className="font-semibold text-blue-400">Phone:</span> {consultation.phone}
                   </p>
                 )}
                 {consultation.company && (
                   <p className="text-lg text-gray-200 mb-2">
-                    <span className="font-semibold text-blue-400">Entreprise:</span> {consultation.company}
+                    <span className="font-semibold text-blue-400">Company:</span> {consultation.company}
                   </p>
                 )}
                 <p className="text-lg text-gray-200 mb-2">
-                  <span className="font-semibold text-blue-400">Type de projet:</span> {consultation.projectType}
+                  <span className="font-semibold text-blue-400">Project Type:</span> {consultation.projectType}
                 </p>
                 {consultation.otherProjectType && (
                   <p className="text-lg text-gray-200 mb-2">
-                    <span className="font-semibold text-blue-400">Autre type:</span> {consultation.otherProjectType}
+                    <span className="font-semibold text-blue-400">Other Type:</span> {consultation.otherProjectType}
                   </p>
                 )}
                 <p className="text-lg text-gray-200 mb-2">
-                  <span className="font-semibold text-blue-400">Délai:</span> {consultation.timeline}
+                  <span className="font-semibold text-blue-400">Timeline:</span> {consultation.timeline}
                 </p>
                 {consultation.description && (
                   <p className="text-lg text-gray-200 mb-4">
@@ -180,16 +182,16 @@ const AdminConsultationPage = () => {
                   </p>
                 )}
                 <p className="text-lg text-gray-200 mb-4">
-                  <span className="font-semibold text-blue-400">Reçu le:</span>{' '}
-                  {new Date(consultation.createdAt).toLocaleDateString('fr-FR', {
+                  <span className="font-semibold text-blue-400">Received on:</span>{' '}
+                  {new Date(consultation.createdAt).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
                 </p>
                 <p className="text-lg text-gray-200 mb-6">
-                  <span className="font-semibold text-blue-400">Statut:</span>{' '}
-                  {consultation.seen ? 'Vu' : 'Non vu'}
+                  <span className="font-semibold text-blue-400">Status:</span>{' '}
+                  {consultation.seen ? 'Seen' : 'Unseen'}
                 </p>
                 <div className="flex gap-3 mt-auto">
                   <motion.button
@@ -197,7 +199,7 @@ const AdminConsultationPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer p-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 hover:shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-all duration-300"
                     onClick={() => handleToggleSeen(consultation._id)}
-                    title={consultation.seen ? 'Marquer comme non vu' : 'Marquer comme vu'}
+                    title={consultation.seen ? 'Mark as unseen' : 'Mark as seen'}
                     aria-label={consultation.seen ? 'Mark as unseen' : 'Mark as seen'}
                   >
                     {consultation.seen ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
@@ -207,7 +209,7 @@ const AdminConsultationPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer p-3 rounded-full bg-gradient-to-r from-red-500 to-red-700 hover:shadow-[0_0_12px_rgba(239,68,68,0.5)] transition-all duration-300"
                     onClick={() => handleDelete(consultation._id)}
-                    title="Supprimer la demande"
+                    title="Delete consultation"
                     aria-label={`Delete ${consultation.fullName} consultation request`}
                   >
                     <FaTrash size={18} />

@@ -20,27 +20,27 @@ const cardVariants = {
 
 const steps = [
   {
-    title: "Le Début",
+    title: "The Beginning",
     description:
-      "Notre aventure a commencé avec une idée simple : transformer une passion en un projet qui crée de la valeur.",
+      "Our journey started with a simple idea: turning passion into a project that creates value.",
     icon: "🌱",
   },
   {
-    title: "Les Défis",
+    title: "Challenges",
     description:
-      "Nous avons affronté de nombreux obstacles, mais chaque étape a été une leçon qui nous a rendus plus forts.",
+      "We faced many obstacles, but each step was a lesson that made us stronger.",
     icon: "⚡",
   },
   {
-    title: "Les Réussites",
+    title: "Achievements",
     description:
-      "Grâce au travail d’équipe et à la persévérance, nous avons accompli des succès dont nous sommes fiers.",
+      "Through teamwork and persistence, we achieved milestones we’re proud of.",
     icon: "🏆",
   },
   {
-    title: "L’Avenir",
+    title: "The Future",
     description:
-      "Ce n’est que le début. Nos ambitions dépassent le présent et nos rêves vont au-delà des limites du possible.",
+      "This is only the beginning. Our ambitions go beyond the present, and our dreams push past all limits.",
     icon: "🚀",
   },
 ];
@@ -55,12 +55,12 @@ export default function AboutTimeline() {
           transition={{ duration: 0.8 }}
           className="text-3xl sm:text-5xl font-extrabold text-center text-white mb-16"
         >
-          Notre <span className="text-yellow-400">Parcours</span>
+          Our <span className="text-cyan-400">Journey</span>
         </motion.h2>
 
         <div className="relative">
-          {/* Ligne verticale */}
-          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-yellow-500 to-yellow-700 opacity-60"></div>
+          {/* Vertical line */}
+          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-cyan-400 to-cyan-600 opacity-60"></div>
 
           {steps.map((step, index) => (
             <motion.div
@@ -74,9 +74,9 @@ export default function AboutTimeline() {
                 index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
               }`}
             >
-              {/* Carte */}
+              {/* Card */}
               <div
-                className={`w-full lg:w-5/12 bg-gray-800/70 backdrop-blur-md p-8 shadow-2xl shadow-cyan-300 rounded-xl border border-yellow-500/30 transition-all duration-500 ${
+                className={`w-full lg:w-5/12 bg-gray-800/70 backdrop-blur-md p-8 shadow-2xl shadow-cyan-300 rounded-xl border border-cyan-500/30 transition-all duration-500 ${
                   index % 2 === 0 ? "lg:mr-auto" : "lg:ml-auto"
                 }`}
               >
@@ -91,8 +91,8 @@ export default function AboutTimeline() {
                 </p>
               </div>
 
-              {/* Point de la timeline */}
-              <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-amber-500 shadow-2xl shadow-red-500 rounded-full border-2 border-yellow-700"></div>
+              {/* Timeline dot */}
+              <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-5 h-5 bg-cyan-400 shadow-2xl shadow-cyan-600 rounded-full border-2 border-cyan-700"></div>
             </motion.div>
           ))}
         </div>

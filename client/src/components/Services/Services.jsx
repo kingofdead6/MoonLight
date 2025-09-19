@@ -45,7 +45,7 @@ const Services = () => {
         transition={{ duration: 0.7 }}
         className="relative max-w-7xl mx-auto text-center"
       >
-        <h2 className="text-4xl md:text-6xl font-extrabold mb-16">Nos Services</h2>
+        <h2 className="text-4xl md:text-6xl font-extrabold mb-16">Our Services</h2>
 
         {error && (
           <div className="fixed top-5 right-5 bg-red-200 border border-red-600 text-red-600 px-4 py-2 rounded-md z-50">
@@ -63,12 +63,12 @@ const Services = () => {
               animate="visible"
               transition={{ duration: 0.6, delay: i * 0.2 }}
               className={`relative flex flex-col items-center w-full max-w-sm rounded-3xl shadow-cyan-300 shadow-md p-8 backdrop-blur-md bg-black/50 border border-blue-500/30 ${
-                service.popular ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : ''
+                service.popular ? 'border-cyan-400 shadow-lg shadow-cyan-400/50' : ''
               }`}
             >
               {service.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black font-bold px-4 py-1 rounded-full flex items-center gap-1 shadow-lg z-10">
-                  <FaStar /> Populaire
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-cyan-400 text-black font-bold px-4 py-1 rounded-full flex items-center gap-1 shadow-lg z-10">
+                  <FaStar /> Popular
                 </div>
               )}
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 mt-6 text-center">
@@ -76,7 +76,7 @@ const Services = () => {
               </h3>
               <p className="text-2xl md:text-3xl font-extrabold text-blue-400 mb-6 text-center">
                 {service.monthprice && service.monthprice !== '0'
-                  ? `${formatPrice(service.price)} + ${formatPrice(service.monthprice)}/mois`
+                  ? `${formatPrice(service.price)} + ${formatPrice(service.monthprice)}/month`
                   : formatPrice(service.price)}
               </p>
               <ul className="list-disc list-inside text-left text-gray-300 w-full mb-6">
@@ -87,7 +87,7 @@ const Services = () => {
               <a
                 href="/consultation"
                 className="mt-auto px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-400 shadow-lg hover:from-blue-600 hover:to-blue-500 text-white font-medium text-center transition-all"
-                aria-label={`Souscrire au service ${service.title}`}
+                aria-label={`Subscribe to service ${service.title}`}
               >
                 {service.button}
               </a>
@@ -95,7 +95,7 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Fourth card (centered) */}
+        {/* Remaining cards (centered if only 1) */}
         {remaining.length > 0 && (
           <div className="flex justify-center">
             {remaining.map((service, i) => (
@@ -106,12 +106,12 @@ const Services = () => {
                 animate="visible"
                 transition={{ duration: 0.6, delay: i * 0.2 }}
                 className={`relative shadow-cyan-300 shadow-md flex flex-col items-center w-full max-w-sm rounded-3xl p-8 backdrop-blur-md bg-black/50 border border-blue-500/30 ${
-                  service.popular ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : ''
+                  service.popular ? 'border-cyan-400 shadow-lg shadow-cyan-400/50' : ''
                 }`}
               >
                 {service.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black font-bold px-4 py-1 rounded-full flex items-center gap-1 shadow-lg z-10">
-                    <FaStar /> Populaire
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-cyan-400 text-black font-bold px-4 py-1 rounded-full flex items-center gap-1 shadow-lg z-10">
+                    <FaStar /> Popular
                   </div>
                 )}
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 mt-6 text-center">
@@ -119,7 +119,7 @@ const Services = () => {
                 </h3>
                 <p className="text-2xl md:text-3xl font-extrabold text-blue-400 mb-6 text-center">
                   {service.monthprice && service.monthprice !== '0'
-                    ? `${formatPrice(service.price)} + ${formatPrice(service.monthprice)}/mois`
+                    ? `${formatPrice(service.price)} + ${formatPrice(service.monthprice)}/month`
                     : formatPrice(service.price)}
                 </p>
                 <ul className="list-disc list-inside text-left text-gray-300 w-full mb-6">
@@ -130,7 +130,7 @@ const Services = () => {
                 <a
                   href="/consultation"
                   className="mt-auto px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-400 shadow-lg hover:from-blue-600 hover:to-blue-500 text-white font-medium text-center transition-all"
-                  aria-label={`Souscrire au service ${service.title}`}
+                  aria-label={`Subscribe to service ${service.title}`}
                 >
                   {service.button}
                 </a>

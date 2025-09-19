@@ -19,16 +19,13 @@ export default function ServicesHero() {
         transition={{ duration: 0.8 }}
         className="relative z-10 max-w-4xl px-6 text-center"
       >
-        <h1 className="text-5xl md:text-6xl font-bold text-yellow-400 drop-shadow-lg">
-          Nos Services IA
+        <h1 className="text-5xl md:text-6xl font-bold text-cyan-400 drop-shadow-lg">
+          Our AI Services
         </h1>
         <p className="mt-6 text-lg md:text-2xl text-gray-200 leading-relaxed">
-          Des sites intelligents, des agents IA et des solutions complètes pour
-          booster votre activité. Choisissez le pack qui correspond le mieux à
-          vos objectifs.
+          Intelligent websites, AI agents, and complete solutions to boost your
+          business. Choose the package that best fits your goals.
         </p>
-
-        
       </motion.div>
     </section>
   );

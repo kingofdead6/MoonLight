@@ -65,8 +65,8 @@ export default function Navbar() {
 
   // Navigation items
   const userLinks = [
-    { label: "Accueil", path: "/" },
-    { label: "À propos", path: "/about" },
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
     { label: "Services", path: "/services" },
   ];
 
@@ -74,11 +74,9 @@ export default function Navbar() {
     { label: "Dashboard", path: "/admin/dashboard" },
     { label: "Services", path: "/admin/services" },
     { label: "Messages", path: "/admin/contact" },
-    { label: "Consultation", path: "/admin/consultation" },
-    { label: "NewsLetter" , path: "/admin/newsletter"}
+    { label: "Consultations", path: "/admin/consultation" },
+    { label: "Newsletter", path: "/admin/newsletter" },
   ];
-
- 
 
   const links = userType === "admin" ? adminLinks : userLinks;
 
@@ -88,7 +86,7 @@ export default function Navbar() {
         <Link
           to={item.path}
           onClick={() => setMenuOpen(false)}
-          className="cursor-pointer hover:text-yellow-400 transition-colors duration-200"
+          className="cursor-pointer hover:text-cyan-400 transition-colors duration-200"
         >
           {item.label}
         </Link>
@@ -107,15 +105,8 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center">
-            <img
-              className="rounded-full object-cover w-full h-full"
-              src="https://res.cloudinary.com/dtwa3lxdk/image/upload/v1757084395/logooo_gfwzzz.png"
-              alt="CONNECTIK Logo"
-            />
-          </div>
-          <h1 className="text-lg sm:text-xl font-bold text-white drop-shadow-cyan-400">
-            CONNECTIK
+          <h1 className="text-lg sm:text-2xl font-bold text-cyan-400 drop-shadow-cyan-400">
+            MoonLight
           </h1>
         </div>
 
@@ -129,14 +120,14 @@ export default function Navbar() {
               to="/consultation"
               className="px-5 py-2 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-700 text-white font-medium shadow-md hover:shadow-xl transition-all duration-300"
             >
-              Réserver un appel
+              Book a Call
             </Link>
           ) : (
             <button
               onClick={handleLogout}
               className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition"
             >
-              Déconnexion
+              Logout
             </button>
           )}
         </div>
@@ -177,7 +168,7 @@ export default function Navbar() {
                     onClick={() => setMenuOpen(false)}
                     className="px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-700 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    Réserver un appel
+                    Book a Call
                   </Link>
                 </li>
               ) : (
@@ -186,7 +177,7 @@ export default function Navbar() {
                     onClick={handleLogout}
                     className="px-6 py-3 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition"
                   >
-                    Déconnexion
+                    Logout
                   </button>
                 </li>
               )}

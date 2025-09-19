@@ -62,8 +62,6 @@ const AdminContactPage = () => {
     }
   };
 
-  
-
   // Handle toggle seen
   const handleToggleSeen = async (id) => {
     try {
@@ -78,14 +76,12 @@ const AdminContactPage = () => {
         prev.map((c) => (c._id === id ? res.data : c))
       );
 
-      setSuccess(`Contact marqué comme ${res.data.seen ? 'vu' : 'non vu'}.`);
+      setSuccess(`Contact marked as ${res.data.seen ? 'seen' : 'unseen'}.`);
     } catch (error) {
-      setError('Impossible de changer le statut.');
+      setError('Unable to change status.');
       console.error('Error toggling seen status:', error);
     }
   };
-
-
 
   // Filter contacts
   const filteredContacts = contacts.filter(
@@ -104,10 +100,10 @@ const AdminContactPage = () => {
       >
         {/* Header */}
         <h2 className="text-4xl md:text-6xl font-extrabold mb-16 text-center">
-          Gérer les Messages de Contact
+          Manage Contact Messages
         </h2>
 
-        {/* Search + Bulk Delete */}
+        {/* Search */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -117,13 +113,12 @@ const AdminContactPage = () => {
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-400" />
             <input
               type="text"
-              placeholder="Rechercher par nom ou email..."
+              placeholder="Search by name or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-900 border border-gray-700 focus:outline-none focus:border-blue-400 text-white text-sm md:text-base placeholder-gray-500"
             />
           </div>
-          
         </motion.div>
 
         {/* Alerts */}
@@ -142,7 +137,7 @@ const AdminContactPage = () => {
         <div className="grid md:grid-cols-3 gap-10">
           {filteredContacts.length === 0 ? (
             <p className="text-gray-300 col-span-full text-center text-lg md:text-xl">
-              Aucun message de contact trouvé.
+              No contact messages found.
             </p>
           ) : (
             filteredContacts.map((contact, i) => (
@@ -155,7 +150,6 @@ const AdminContactPage = () => {
                 className="p-8 rounded-3xl bg-black/50 border border-blue-500/30 backdrop-blur-md hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] transition-all duration-300 flex flex-col"
               >
                 <div className="flex items-center mb-4">
-                  
                   <h3 className="text-xl md:text-2xl font-semibold text-white">{contact.name}</h3>
                 </div>
                 <p className="text-lg text-gray-200 mb-2">
@@ -165,21 +159,21 @@ const AdminContactPage = () => {
                   <span className="font-semibold text-blue-400">Message:</span> {contact.message}
                 </p>
                 <p className="text-lg text-gray-200 mb-2">
-                  <span className="font-semibold text-blue-400">Reçu le:</span>{' '}
-                  {new Date(contact.receivedAt || contact.createdAt).toLocaleDateString('fr-FR', {
+                  <span className="font-semibold text-blue-400">Received on:</span>{' '}
+                  {new Date(contact.receivedAt || contact.createdAt).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
                 </p>
-                
+
                 <div className="flex gap-3 mt-auto">
                   <motion.button
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer p-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 hover:shadow-[0_0_12px_rgba(59,130,246,0.5)] transition-all duration-300"
                     onClick={() => handleToggleSeen(contact._id)}
-                    title={contact.seen ? 'Marquer comme non vu' : 'Marquer comme vu'}
+                    title={contact.seen ? 'Mark as unseen' : 'Mark as seen'}
                   >
                     {contact.seen ? <FaEye size={18} /> : <FaEyeSlash size={18} />}
                   </motion.button>
@@ -188,7 +182,7 @@ const AdminContactPage = () => {
                     whileTap={{ scale: 0.95 }}
                     className="cursor-pointer p-3 rounded-full bg-gradient-to-r from-red-500 to-red-700 hover:shadow-[0_0_12px_rgba(239,68,68,0.5)] transition-all duration-300"
                     onClick={() => handleDelete(contact._id)}
-                    title="Supprimer le message"
+                    title="Delete message"
                   >
                     <FaTrash size={18} />
                   </motion.button>

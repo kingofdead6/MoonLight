@@ -3,32 +3,32 @@ import { motion } from "framer-motion";
 const WhyChoose = () => {
   const features = [
     {
-      title: "Conversion Maximale",
+      title: "Maximum Conversion",
       description:
-        "Chaque élément est conçu pour transformer vos visiteurs en clients. Nos designs et IA inspirent l’action.",
-      colorClass: "text-yellow-400",
-      shadow: "rgba(250, 204, 21, 0.7)",
+        "Every element is designed to turn visitors into clients. Our designs and AI inspire action.",
+      colorClass: "text-cyan-400",
+      shadow: "rgba(34, 211, 238, 0.7)", // cyan glow
     },
     {
-      title: "Intelligence Artificielle Personnalisée",
+      title: "Personalized Artificial Intelligence",
       description:
-        "Des agents IA qui gèrent vos prospects 24/7, planifient des rendez-vous et boostent vos ventes.",
+        "AI agents that manage your leads 24/7, schedule appointments, and boost your sales.",
       colorClass: "text-blue-400",
-      shadow: "rgba(96, 165, 250, 0.7)",
+      shadow: "rgba(96, 165, 250, 0.7)", // blue glow
     },
     {
-      title: "Service Premium",
+      title: "Premium Service",
       description:
-        "Support complet, design exclusif et expérience fluide. Nous acceptons un nombre limité de projets par mois.",
+        "Complete support, exclusive design, and a seamless experience. We accept only a limited number of projects per month.",
       colorClass: "text-purple-400",
-      shadow: "rgba(192, 132, 252, 0.7)",
+      shadow: "rgba(192, 132, 252, 0.7)", // purple glow
     },
     {
-      title: "Innovation Continue",
+      title: "Continuous Innovation",
       description:
-        "Nous innovons constamment pour offrir des solutions modernes, efficaces et adaptées à vos besoins.",
+        "We constantly innovate to deliver modern, efficient, and tailored solutions for your needs.",
       colorClass: "text-emerald-400",
-      shadow: "rgba(52, 211, 153, 0.7)",
+      shadow: "rgba(52, 211, 153, 0.7)", // green glow
     },
   ];
 
@@ -40,8 +40,7 @@ const WhyChoose = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="text-4xl md:text-5xl font-bold mb-16"
       >
-       Pourquoi choisir 
-       <span className="text-yellow-400"> CONNECTIK</span> ?
+        Why Choose <span className="text-cyan-400">MoonLight</span>?
       </motion.h2>
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
